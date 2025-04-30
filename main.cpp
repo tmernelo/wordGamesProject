@@ -9,10 +9,10 @@ int getMenuChoice() {
     int userInput;
 
     cout << "~~WORD GAMES~~" << endl;
-    cout << endl << setw(44) << setfill('-') << "" <<  endl;
+    cout << setw(44) << setfill('-') << "" <<  endl;
     cout << "Options menu:" << endl;
     cout << "(" << HANGMAN << ") Play Hangman! " <<  endl;
-    cout << "(" << WORDLE  << ") Play Worlde! " <<  endl;
+    cout << "(" << WORDLE  << ") Play Wordle! " <<  endl;
     cout << "(" << LEADERBOARD  << ") Show the Leaderboard" <<  endl;
     cout << "(" << QUIT  << ") Exit Game" <<  endl;
 
@@ -49,7 +49,7 @@ int main() {
                 cout << "HangMan!!" << endl;
                 break;
             case WORDLE:
-                cout << "Worlde!!" << endl;
+                cout << "Wordle!!" << endl;
                 break;
         }
 
