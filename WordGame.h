@@ -1,12 +1,14 @@
 #ifndef WORDGAME_H
 #define WORDGAME_H
 #include <string>
+#include "LinkedList.h"
 
 class User;  // Forward declaration
 
 class WordGame {
 protected:
     User* player;  // Only a pointer, not the full object
+    LinkedList wordBank; 
 
 public:
     WordGame(User* user) : player(user) {}
