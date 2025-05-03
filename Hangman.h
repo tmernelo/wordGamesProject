@@ -8,6 +8,7 @@
 class Hangman : public WordGame {
 private: 
     std::vector<std::string> asciiVector;
+    LinkedList wordBank;
 public:
     Hangman(User* u);
     void drawHangman(int misses);
