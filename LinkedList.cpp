@@ -39,54 +39,19 @@ void LinkedList::clear() {
     listSize = 0;
 }
 
-void LinkedList::alphaInsert(const string& word) {
-    Node* addNode = new Node(word);
-    Node* current = head;
-
-    while (current && word > (*current).getWord()) {
-        current = (*current).getNext();
-    }
-
-    if (current == nullptr) {
-        if (!head) {
-            head = addNode;
-            tail = addNode;
-        } else {
-            (*tail).setNext(addNode);
-            (*addNode).setPrev(tail);
-            tail = addNode;
-        }
-        
+void LinkedList::push_back(const std::string& word){
+    Node* newNode = new Node(word);
+    
+    if (!head) {
+       head = newNode; 
+       tail = newNode; 
     } else {
-        if (current == head) {
-            (*addNode).setNext(head);
-            (*head).setPrev(addNode);
-            head = addNode;
-        } else {
-            Node* prevNode = (*current).getPrev();
-            (*addNode).setNext(current);
-            (*addNode).setPrev(prevNode);
-            (*prevNode).setNext(addNode);
-            (*current).setPrev(addNode);
-        }
+       (*tail).setNext(newNode);
+       (*newNode).setPrev(tail);
+       tail = newNode;
     }
-
+    
     listSize++;
-}
-   
-   
-bool LinkedList::checkDupe(const string& word) {
-      Node* current = (*this).head;
-      
-      while (current) {
-           if((*current).getWord() == word) {
-               return true;
-            }
-         current = (*current).getNext();
-         
-      }
-      return false;
-      
-}
+ }
 
    
