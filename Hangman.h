@@ -10,6 +10,9 @@ private:
     std::vector<std::string> asciiVector;
 public:
     Hangman(User* u);
+    void drawHangman(int misses);
+    void checkLetter(std::vector<char>& word, std::vector<char>& toGuess, char guessed);
+
     void play();
 
 };
