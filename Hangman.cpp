@@ -50,11 +50,11 @@ void Hangman::play() {
         }
     }
 
-    int tries = 6;
+    int misses = 0;
     int tracker = count_if(answerWord.begin(), answerWord.end(), ::isalpha);
-    bool game = true;
 
-    while (game) {
+
+    while (misses < 7) {
         char guess;
         cout << "Guess a letter: ";
         cin >> guess;
