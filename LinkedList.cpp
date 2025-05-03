@@ -53,7 +53,7 @@ void LinkedList::push_back(const std::string& word){
     
     listSize++;
  }
-bool LinkedList::loadWords(const string& filename){
+bool LinkedList::loadWords(const string filename){
    ifstream file(filename);
    if (!file) {
       return false;
@@ -66,5 +66,16 @@ bool LinkedList::loadWords(const string& filename){
    }
    file.close();
    return true;
+}
+
+string LinkedList::getRandomWord() const {
+
+   // Generate a random number within the range [min, max]
+   int randomNumber =  (std::rand() % (size() + 1));
+   Node* current = getHead();
+   for (int i = 0; i < randomNumber; i++){
+      current = current->getNext();
+   }
+   return current->getWord();
 }
    
