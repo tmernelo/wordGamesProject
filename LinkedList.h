@@ -26,7 +26,7 @@ struct LinkedList {
       Node* getHead() const;
 
       void push_back(const std::string& word);
-      
+      bool loadWords(string file);
 };
 
 #endif
