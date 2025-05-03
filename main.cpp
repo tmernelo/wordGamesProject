@@ -42,13 +42,13 @@ int main() {
     // ADDED: Create a User and ask for their name
     User player;
     string name;
-    WordGame* hangman = new Hangman();
-    WordGame* wordle = new Wordle();
-
+    
     cout << "Welcome! Please enter your name: ";
     cin >> name;
     player.setName(name);
 
+    WordGame* hangman = new Hangman(player);
+    WordGame* wordle = new Wordle(player);
     
     int userInput;
 
