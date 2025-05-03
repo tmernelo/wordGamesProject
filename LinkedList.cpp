@@ -53,5 +53,18 @@ void LinkedList::push_back(const std::string& word){
     
     listSize++;
  }
+bool LinkedList::loadWords(const string& filename){
+   ifstream file(filename);
+   if (!file) {
+      return false;
+   }
 
+   clear();
+   string word;
+   while (file >> word) {
+      push_back(word);
+   }
+   file.close();
+   return true;
+}
    
