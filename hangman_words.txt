@@ -1,0 +1,7 @@
+computer
+science
+hangman
+cplusplus
+pointer
+loop
+function
