@@ -25,28 +25,65 @@ void Hangman::drawHangman(int misses) {
 
 int Hangman::checkLetter(vector<char>& word, vector<char>& toGuess, char guessed) {
     int counter = 0;
-    if (!isalpha(guessed)) return -1;
+
     for (int i = 0; i < word.size(); i++) {
-        if (word[i] == guessed) {
-            toGuess[i] = guessed;
+
+        if (word.at(i) == guessed) {
+            toGuess.at(i) = guessed;
             counter++;
         }
+        
     }
+
     return counter;
+}
+
+bool containsLetter(vector<char>& guessed, char letter){
+    for (char c : vec) {
+        if (c == letter) {
+            return true;
+        }
+    } 
+    return false;
+}
+
+char askUserInput(vector<char>& attemptList) {
+    char userGuess;
+    while (true){
+        cout << "give me a letter: " << endl;
+    
+        cin >> userGuess;
+    
+        if (!isalpha(userGuess)) {
+            cout << "input must be a letter!" << endl;
+            continue;
+        } else if (containsLetter(attemptList, userGuess){
+            cout << "You've already guessed that letter! Try again..." << endl;
+            continue;
+        } else {
+            attemptList.push_back(userGuess);
+        }
+    }
+
+    return userGuess;
+
 }
 
 void Hangman::play() {
     string randomWord = wordBank.getRandomWord();
     vector<char> answerWord;
     vector<char> displayWord;
+    vector<char> attemptList;
 
-    for (char c : randomWord) {
-        if (isspace(c)) {
+    for (int i = 0; i < randomWord.size(); i++) {
+        if (isspace(randomWord.at(i))){
             answerWord.push_back(' ');
             displayWord.push_back(' ');
-        } else {
-            answerWord.push_back(c);
+            
+        } else if (isalpha(randomWord.at(i))){
+            answerWord.push_back(randomWord.at(i));
             displayWord.push_back('_');
+            
         }
     }
 
@@ -59,7 +96,7 @@ void Hangman::play() {
         cout << "Guess a letter: ";
         cin >> guess;
 
-        int result = checkLetter(answerWord, displayWord, guess);
+        int result = checkLetter(answerWord, displayWord, userGuess);
         if (result == -1) {
             cout << "Invalid input." << endl;
         } else if (result == 0) {
