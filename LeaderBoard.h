@@ -6,7 +6,7 @@
 
 class LeaderBoard {
 private:
-    vector<User> topPlayers;
+    std::vector<User> topPlayers;
 
 public:
     void addPlayer(const User& player);
