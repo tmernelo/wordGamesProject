@@ -1,34 +1,28 @@
 #ifndef USER_H
 #define USER_H
 #include <string>
-using namespace std;
+
 
 // ADDED: User class to track player name and score
 class User {
     private:
-        string name;
+        std::string name;
         int score;
+        int misses;
     
     public:
-        User() {
-            score = 0;
-        }
+        User();
+        User(std::string name);
+        
+        void setName(std::string name);
     
-        void setName(string username) {
-            name = username;
-        }
+        std::string getName() const;
     
-        string getName() const {
-            return name;
-        }
+        void miss();
+
+        void addWin();
     
-        void addWin() {
-            score++;
-        }
-    
-        int getScore() const {
-            return score;
-        }
+        int getScore() const;
 };
 
 #endif
