@@ -10,9 +10,6 @@ Hangman::Hangman(User* u) : WordGame(u) {
     wordBank.loadWordsFromFile("hangman_words.txt");
 }
 
-bool Hangman::gameOver() {
-    return false;
-}
 
 void drawHangman(int attemptsLeft) {
     if (attemptsLeft == 5) {
