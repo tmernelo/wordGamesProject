@@ -21,14 +21,12 @@ struct LinkedList {
       ~LinkedList();
       void clear();
       
-      //getters
       int size() const;
       Node* getTail() const;   
       Node* getHead() const;
-      
-      void alphaInsert(const std::string& word); // inserts new word
 
-      bool checkDupe(const std::string& word); // check dupe before alpha insert
+      void push_back(const std::string& word);
+      
 };
 
 #endif
