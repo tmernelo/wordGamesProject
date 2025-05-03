@@ -8,27 +8,22 @@ using namespace std;
 
 Hangman::Hangman(User* u) : WordGame(u) {
     wordBank.loadWords("hangman_words.txt");
+    asciiVector.push_back("+---+\n|   |\n    |\n    |\n    |\n    |\n=========\n");
+    asciiVector.push_back("+---+\n|   |\nO   |\n    |\n    |\n    |\n=========\n");
+    asciiVector.push_back("+---+\n|   |\nO   |\n|   |\n    |\n    |\n=========\n");
+    asciiVector.push_back("+---+\n|   |\nO   |\n/|   |\n    |\n    |\n=========\n");
+    asciiVector.push_back("+---+\n|   |\nO   |\n/|\\  |\n    |\n    |\n=========\n");
+    asciiVector.push_back("+---+\n|   |\nO   |\n/|\\  |\n/     |\n    |\n=========\n");
+    asciiVector.push_back("+---+\n|   |\nO   |\n/|\\  |\n/ \\  |\n    |\n=========\n");
 }
 
 
-
-void drawHangman(int attemptsLeft) {
-    if (attemptsLeft == 5) {
-        cout << "  |     O" << endl;
-    } else if (attemptsLeft == 4) {
-        cout << "  |     O\n  |     |" << endl;
-    } else if (attemptsLeft == 3) {
-        cout << "  |     O\n  |    /|" << endl;
-    } else if (attemptsLeft == 2) {
-        cout << "  |     O\n  |    /|\\" << endl;
-    } else if (attemptsLeft == 1) {
-        cout << "  |     O\n  |    /|\n  |    /" << endl;
-    } else if (attemptsLeft == 0) {
-        cout << "  |     O\n  |    /|\n  |    / \\" << endl;
-    }
+void Hangman::drawHangman(int misses) {
+    cout << asciiVector.at(misses) ;
+  
 }
 
-int checkLetter(vector<char>& word, vector<char>& toGuess, char guessed) {
+int Hangman::checkLetter(vector<char>& word, vector<char>& toGuess, char guessed) {
     int counter = 0;
 
     for (int i = 0; i < word.size(); i++) {
