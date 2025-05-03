@@ -38,29 +38,31 @@ int Hangman::checkLetter(vector<char>& word, vector<char>& toGuess, char guessed
     return counter;
 }
 
+bool containsLetter(vector<char>& guessed, char letter){
+    for (char c : vec) {
+        if (c == letter) {
+            return true;
+        }
+    } 
+    return false;
+}
+
 char askUserInput(vector<char>& attemptList) {
     char userGuess;
-
-    cout << "give me a letter: " << endl;
-
-    cin >> userGuess;
-
-    if (!isalpha(userGuess)) {
-        cout << "input must be a letter!" << endl;
-        userGuess = askUserInput(attemptList);
-    } else {
-        
-        for (int i = 0; i < attemptList.size(); i++) { 
-
-            if (attemptList.at(i) == userGuess) {
-                cout << "Letter already attempted! Try again.. " << endl;
-                userGuess = askUserInput(attemptList);
-                break;
-            }
-            
-        }
-        attemptList.push_back(userGuess);
+    while (true){
+        cout << "give me a letter: " << endl;
     
+        cin >> userGuess;
+    
+        if (!isalpha(userGuess)) {
+            cout << "input must be a letter!" << endl;
+            continue;
+        } else if (containsLetter(attemptList, userGuess){
+            cout << "You've already guessed that letter! Try again..." << endl;
+            continue;
+        } else {
+            attemptList.push_back(userGuess);
+        }
     }
 
     return userGuess;
