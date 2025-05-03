@@ -11,7 +11,7 @@ private:
 public:
     Hangman(User* u);
     void play();
-
+    
 };
 
 #endif
