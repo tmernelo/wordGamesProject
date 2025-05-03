@@ -11,7 +11,7 @@ private:
 public:
     Hangman(User* u);
     void drawHangman(int misses);
-    void checkLetter(std::vector<char>& word, std::vector<char>& toGuess, char guessed);
+    int checkLetter(std::vector<char>& word, std::vector<char>& toGuess, char guessed);
 
     void play();
 
