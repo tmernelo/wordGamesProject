@@ -2,6 +2,7 @@
 #define HANGMAN_H
 
 #include "WordGame.h"
+#include "LinkedList.h"
 #include <string>
 #include <vector>
 
@@ -10,6 +11,7 @@ private:
     std::vector<std::string> asciiVector;
     LinkedList wordBank;
 public:
+    Hangman();
     Hangman(User* u);
     void drawHangman(int misses);
     int checkLetter(std::vector<char>& word, std::vector<char>& toGuess, char guessed);

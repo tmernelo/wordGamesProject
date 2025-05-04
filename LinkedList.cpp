@@ -71,7 +71,8 @@ bool LinkedList::loadWords(const string filename){
 string LinkedList::getRandomWord() const {
 
    // Generate a random number within the range [min, max]
-   int randomNumber =  (std::rand() % (size() + 1));
+   srand(time(0));
+   int randomNumber =  (rand() % (size()));
    Node* current = getHead();
    for (int i = 0; i < randomNumber; i++){
       current = current->getNext();

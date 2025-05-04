@@ -8,19 +8,18 @@ using namespace std;
 
 Hangman::Hangman(User* u) : WordGame(u) {
     wordBank.loadWords("hangman_words.txt");
-    asciiVector.push_back("+---+\n|   |\n    |\n    |\n    |\n    |\n=========\n");
-    asciiVector.push_back("+---+\n|   |\nO   |\n    |\n    |\n    |\n=========\n");
-    asciiVector.push_back("+---+\n|   |\nO   |\n|   |\n    |\n    |\n=========\n");
-    asciiVector.push_back("+---+\n|   |\nO   |\n/|   |\n    |\n    |\n=========\n");
-    asciiVector.push_back("+---+\n|   |\nO   |\n/|\\  |\n    |\n    |\n=========\n");
-    asciiVector.push_back("+---+\n|   |\nO   |\n/|\\  |\n/     |\n    |\n=========\n");
-    asciiVector.push_back("+---+\n|   |\nO   |\n/|\\  |\n/ \\  |\n    |\n=========\n");
+    asciiVector.push_back(" +---+\n |   |\n     |\n     |\n    |\n    |\n=========\n");
+    asciiVector.push_back(" +---+\n |   |\n O   |\n     |\n     |\n     |\n=========\n");
+    asciiVector.push_back(" +---+\n |   |\n O   |\n |   |\n     |\n     |\n=========\n");
+    asciiVector.push_back(" +---+\n |   |\n O   |\n/|   |\n     |\n     |\n=========\n");
+    asciiVector.push_back(" +---+\n |   |\n O   |\n/|\\  |\n     |\n     |\n=========\n");
+    asciiVector.push_back(" +---+\n |   |\n O   |\n/|\\  |\n/     |\n     |\n=========\n");
+    asciiVector.push_back(" +---+\n |   |\n O   |\n/|\\  |\n/ \\  |\n     |\n=========\n");
 }
 
 
 void Hangman::drawHangman(int misses) {
-    cout << asciiVector.at(misses) ;
-  
+    if (misses <= asciiVector.size()){ cout << asciiVector.at(misses); }
 }
 
 int Hangman::checkLetter(vector<char>& word, vector<char>& toGuess, char guessed) {
@@ -39,7 +38,7 @@ int Hangman::checkLetter(vector<char>& word, vector<char>& toGuess, char guessed
 }
 
 bool containsLetter(vector<char>& guessed, char letter){
-    for (char c : vec) {
+    for (char c : guessed) {
         if (c == letter) {
             return true;
         }
@@ -57,12 +56,13 @@ char askUserInput(vector<char>& attemptList) {
         if (!isalpha(userGuess)) {
             cout << "input must be a letter!" << endl;
             continue;
-        } else if (containsLetter(attemptList, userGuess){
+        } else if (containsLetter(attemptList, userGuess)){
             cout << "You've already guessed that letter! Try again..." << endl;
             continue;
         } else {
             attemptList.push_back(userGuess);
         }
+        break;
     }
 
     return userGuess;
@@ -88,36 +88,42 @@ void Hangman::play() {
     }
 
     int misses = 0;
+    int correct = 0;
+    int tries = 7;
     int tracker = count_if(answerWord.begin(), answerWord.end(), ::isalpha);
 
 
     while (misses < 7) {
-        char guess;
-        cout << "Guess a letter: ";
-        cin >> guess;
+        char guess = askUserInput(attemptList);
 
-        int result = checkLetter(answerWord, displayWord, userGuess);
-        if (result == -1) {
-            cout << "Invalid input." << endl;
-        } else if (result == 0) {
+        int result = checkLetter(answerWord, displayWord, guess);
+
+        if (result == 0) {
             tries--;
+            misses++;
+            if (misses == 7){
+                misses--; // Did this to allow hangman to print one more time
+                drawHangman(misses);
+                cout << "Game Over! Word was: " << randomWord << endl;
+                return;
+            }
             cout << "Wrong! Tries left: " << tries << endl;
-            drawHangman(tries);
+            drawHangman(misses);
         } else {
             tracker -= result;
+            correct++;
             cout << "Correct! " << tracker << " letters left." << endl;
+            
         }
 
         for (char c : displayWord) cout << c << ' ';
         cout << endl;
-
-        if (tries <= 0) {
-            cout << "Game Over! Word was: " << randomWord << endl;
-            game = false;
-        } else if (tracker == 0) {
+        
+        if (tracker == 0) {
             cout << "You WIN!" << endl;
-            player->addWin();
-            game = false;
+            float tempScore = static_cast<float> (correct)/(correct+misses); 
+            player->setScore(tempScore);
+            return;
         }
     }
 }

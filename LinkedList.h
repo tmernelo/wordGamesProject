@@ -26,7 +26,7 @@ struct LinkedList {
       Node* getHead() const;
 
       void push_back(const std::string& word);
-      bool loadWords(std::string file);
+      bool loadWords(const std::string file);
       std::string getRandomWord() const;
 };
 

@@ -4,7 +4,11 @@
 #include <string>
 #include <random>
 #include <cctype>
+#include "Hangman.h"
 #include "User.h"
+#include "WordGame.h"
+#include "LinkedList.h"
+// #include "Wordle.h"
 
 using namespace std;
 
@@ -37,18 +41,25 @@ int getMenuChoice() {
 
 }
 
+// Bundled up hangman calls to avoid initialization error in our switch statement
+void playHangman(User* player) {
+    WordGame* hangman = new Hangman(player);
+    hangman->play();
+    delete hangman;
+}
+
 
 int main() {
     // ADDED: Create a User and ask for their name
-    User player;
+    User* player;
     string name;
     
     cout << "Welcome! Please enter your name: ";
     cin >> name;
-    player.setName(name);
+    player->setName(name);
 
-    WordGame* hangman = new Hangman(player);
-    WordGame* wordle = new Wordle(player);
+    
+    // WordGame* wordle = new Wordle(player);
     
     int userInput;
 
@@ -65,18 +76,20 @@ int main() {
                 break;
             case HANGMAN:
                 cout << "HangMan!!" << endl;
-                hangman->run();
-                delete hangman;
+                playHangman(player); // fixed error w/ initializing at when jumping to case @runtime 
                 break;
             case WORDLE:
                 cout << "Wordle!!" << endl;
+                break;
+            default:
+                cout << "Enter correct number" << endl; 
                 break;
         }
 
     } while (userInput != QUIT);
 
      // ADDED: Show the player's final score on exit
-    cout << "Final score for " << player.getName() << ": " << player.getScore() << " win(s)." << endl;
+    cout << "Final score for " << player->getName() << ": " << player->getScore() << " win(s)." << endl;
 
     return 0;
 }

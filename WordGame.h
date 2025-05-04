@@ -2,8 +2,7 @@
 #define WORDGAME_H
 #include <string>
 #include "LinkedList.h"
-
-class User;  // Forward declaration
+#include "User.h"
 
 class WordGame {
 protected:
@@ -13,6 +12,7 @@ protected:
 public:
     WordGame(User* user) : player(user) {}
     virtual void play() = 0;    // At least one virtual function to make it abstract
+    virtual ~WordGame() {}
 };
 
 #endif

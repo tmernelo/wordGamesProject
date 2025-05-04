@@ -7,8 +7,8 @@
 class User {
     private:
         std::string name;
-        int score;
-        int misses;
+        float score;
+        
     
     public:
         User();
@@ -18,11 +18,11 @@ class User {
     
         std::string getName() const;
     
-        void miss();
-
-        void addWin();
     
-        int getScore() const;
+
+        // void addWin();
+        void setScore(float score);
+        float getScore() const;
 };
 
 #endif
