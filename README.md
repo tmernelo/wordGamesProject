@@ -3,7 +3,7 @@ WordGames Group Project README.md
 
 Compiled File: WordGame 
 
-##Notes 
+## Notes 
 The current iteration of the project only compiled/used:
 Main.cpp, Hangman.cpp, User.cpp, LinkedList.cpp, Node.cpp
 
