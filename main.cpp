@@ -8,7 +8,8 @@
 #include "User.h"
 #include "WordGame.h"
 #include "LinkedList.h"
-// #include "Wordle.h"
+#include "Wordle.h"
+#include "LeaderBoard.h"
 
 using namespace std;
 
@@ -44,19 +45,29 @@ int getMenuChoice() {
 // Bundled up hangman calls to avoid initialization error in our switch statement
 void playHangman(User* player) {
     WordGame* hangman = new Hangman(player);
+    
     hangman->play();
     delete hangman;
 }
 
+void playWordle(User* player) {
+    WordGame* wordle = new Wordle(player);
+    wordle->play();
+    delete wordle;
+}
+
+
 
 int main() {
     // ADDED: Create a User and ask for their name
-    User* player;
+    User player;
     string name;
     
     cout << "Welcome! Please enter your name: ";
     cin >> name;
-    player->setName(name);
+    player.setName(name);
+    LeaderBoard* leaderboard = new LeaderBoard();
+    leaderboard -> addPlayer(&player);
 
     
     // WordGame* wordle = new Wordle(player);
@@ -73,13 +84,15 @@ int main() {
                 break;
             case LEADERBOARD:
                 cout << "Leaderboard: " << endl;
+                leaderboard -> showTopPlayers();
                 break;
             case HANGMAN:
-                cout << "HangMan!!" << endl;
-                playHangman(player); // fixed error w/ initializing at when jumping to case @runtime 
+                cout << "Hangman!!" << endl;
+                playHangman(&player); // fixed error w/ initializing at when jumping to case @runtime 
                 break;
             case WORDLE:
                 cout << "Wordle!!" << endl;
+                playWordle(&player);
                 break;
             default:
                 cout << "Enter correct number" << endl; 
@@ -89,7 +102,7 @@ int main() {
     } while (userInput != QUIT);
 
      // ADDED: Show the player's final score on exit
-    cout << "Final score for " << player->getName() << ": " << player->getScore() << " win(s)." << endl;
+    cout << "Final score for " << player.getName() << ": " << player.getScore() << " win(s)." << endl;
 
     return 0;
 }
