@@ -24,16 +24,12 @@ void Hangman::drawHangman(int misses) {
 
 int Hangman::checkLetter(vector<char>& word, vector<char>& toGuess, char guessed) {
     int counter = 0;
-
     for (int i = 0; i < word.size(); i++) {
-
         if (word.at(i) == guessed) {
             toGuess.at(i) = guessed;
             counter++;
-        }
-        
+        }       
     }
-
     return counter;
 }
 
@@ -49,8 +45,7 @@ bool containsLetter(vector<char>& guessed, char letter){
 char askUserInput(vector<char>& attemptList) {
     char userGuess;
     while (true){
-        cout << "give me a letter: " << endl;
-    
+        cout << "give me a letter: " << endl;    
         cin >> userGuess;
     
         if (!isalpha(userGuess)) {
@@ -121,8 +116,8 @@ void Hangman::play() {
         
         if (tracker == 0) {
             cout << "You WIN!" << endl;
-            float tempScore = static_cast<float> (correct)/(correct+misses); 
-            player->setScore(tempScore);
+            //float tempScore = static_cast<float> (correct)/(correct+misses); 
+            player->addWin();
             return;
         }
     }
