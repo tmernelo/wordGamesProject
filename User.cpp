@@ -13,12 +13,13 @@ std::string User::getName() const {
 }
 
 
-void User::setScore(float score){
-    score = score;
+void User::setScore(float newScore){
+    score = newScore;
 }
-// void User::addWin() {
-//     score++;
-// }
+
+void User::addWin() {
+    score++;
+}
 
 float User::getScore() const {
     return score;
