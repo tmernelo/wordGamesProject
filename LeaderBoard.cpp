@@ -1,18 +1,19 @@
 #include "LeaderBoard.h"
+#include "User.h"
 #include <algorithm>
 #include <iostream>
 using namespace std;
 
-void LeaderBoard::addPlayer(const User& player) {
+void LeaderBoard::addPlayer(User* player) {
     topPlayers.push_back(player);
-    sort(topPlayers.begin(), topPlayers.end(), [](const User& a, const User& b) {
-        return a.getScore() > b.getScore();
+    sort(topPlayers.begin(), topPlayers.end(), [](User* a, const User* b) {
+        return a -> getScore() > b -> getScore();
     });
 }
 
 void LeaderBoard::showTopPlayers() const {
     cout << "=== Leaderboard ===" << endl;
     for (const auto& player : topPlayers) {
-        cout << player.getName() << " - " << player.getScore() << " win(s)" << endl;
+        cout << player -> getName() << " - " << player -> getScore() << " win(s)" << endl;
     }
 }
