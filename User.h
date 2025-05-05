@@ -20,7 +20,7 @@ class User {
     
     
 
-        // void addWin();
+        void addWin();
         void setScore(float score);
         float getScore() const;
 };
