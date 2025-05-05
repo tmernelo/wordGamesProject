@@ -3,15 +3,20 @@
 #include <algorithm>
 using namespace std;
 
+#define RESET "\033[0m"
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define YELLOW "\033[33m"
+
 Wordle::Wordle(User* u) : WordGame(u) {
-    wordBank.loadWordsFromFile("wordle_words.txt");
+    wordBank.loadWords("wordle_words.txt");
 }
 
 bool Wordle::gameOver() {
     return false;
 }
 
-void Wordle::play() {
+void Wordle::play() { 
     string target = wordBank.getRandomWord();
     transform(target.begin(), target.end(), target.begin(), ::tolower);
 
@@ -32,11 +37,11 @@ void Wordle::play() {
         cout << "Feedback: ";
         for (int i = 0; i < 5; i++) {
             if (guess[i] == target[i]) {
-                cout << (char)toupper(guess[i]); // correct position
+                cout << GREEN << (char)toupper(guess[i]) << RESET; // correct position
             } else if (target.find(guess[i]) != string::npos) {
-                cout << guess[i]; // wrong position
+                cout << YELLOW << guess[i] << RESET; // wrong position
             } else {
-                cout << '_'; // not in word
+                cout << RED << '_' << RESET; // not in word
             }
         }
         cout << endl;
