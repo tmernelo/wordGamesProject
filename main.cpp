@@ -9,7 +9,7 @@
 #include "WordGame.h"
 #include "LinkedList.h"
 #include "Wordle.h"
-#include "LeaderBoard.h"
+#include "LeaderBoardList.h"
 
 using namespace std;
 
@@ -66,12 +66,9 @@ int main() {
     cout << "Welcome! Please enter your name: ";
     cin >> name;
     player.setName(name);
-    LeaderBoard* leaderboard = new LeaderBoard();
-    leaderboard -> addPlayer(&player);
+    LeaderBoardList* leaderLL = new LeaderBoardList();
+    leaderLL->loadFromFile("leaderboard.txt");
 
-    
-    // WordGame* wordle = new Wordle(player);
-    
     int userInput;
 
     do {
@@ -83,8 +80,8 @@ int main() {
                 cout << "Thank you! Bye!" << endl;
                 break;
             case LEADERBOARD:
-                cout << "Leaderboard: " << endl;
-                leaderboard -> showTopPlayers();
+                leaderLL -> displayTopFive();
+                leaderLL -> insertPlayer(player);
                 break;
             case HANGMAN:
                 cout << "Hangman!!" << endl;
@@ -100,7 +97,7 @@ int main() {
         }
 
     } while (userInput != QUIT);
-
+    leaderLL->saveToFile("LeaderBoard.txt");
      // ADDED: Show the player's final score on exit
     cout << "Final score for " << player.getName() << ": " << player.getScore() << " win(s)." << endl;
 
