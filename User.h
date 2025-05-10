@@ -7,12 +7,14 @@
 class User {
     private:
         std::string name;
-        float score;
+        int score;
+        //float score;
         
     
     public:
         User();
         User(std::string name);
+        User(std::string name,int score);
         
         void setName(std::string name);
     
