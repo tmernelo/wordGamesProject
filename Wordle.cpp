@@ -1,4 +1,5 @@
 #include "Wordle.h"
+#include "LinkedList.h"
 #include <iostream>
 #include <algorithm>
 using namespace std;
@@ -17,6 +18,7 @@ bool Wordle::gameOver() {
 }
 
 void Wordle::play() { 
+    LinkedList * leaderboardLL = new LinkedList();
     string target = wordBank.getRandomWord();
     transform(target.begin(), target.end(), target.begin(), ::tolower);
 
@@ -49,6 +51,7 @@ void Wordle::play() {
         if (guess == target) {
             cout << "You guessed it! The word was: " << target << endl;
             player->addWin();
+            // leaderboardLL -> insertUser(*player);
             return;
         }
 
