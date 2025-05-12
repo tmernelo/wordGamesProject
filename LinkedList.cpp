@@ -80,3 +80,92 @@ string LinkedList::getRandomWord() const {
    return current->getWord();
 }
    
+
+void LinkedList::insertPlayer(const User& newPlayer){
+   // Check if there is an existing player with the same name
+   Node* current = head;
+   Node* previous = nullptr;
+
+   while(current != nullptr){
+       // if there is, replace the lower score with the higher score
+       if(current -> getUser().getName() == newPlayer.getName()){
+           if(newPlayer.getScore() > current -> getUser().getScore()){
+               current -> setUser(newPlayer);
+           }
+           return;
+       }
+       previous = current;
+       current = current -> getNext();
+   }
+
+   // insert the user in the correct order
+   Node* newNode = new Node(newPlayer);
+   if(!head || newPlayer.getScore() > head -> getUser().getScore()){
+       newNode -> setNext(head);
+       head = newNode; 
+   }else{
+       current = head; 
+       while(current -> getNext() && current -> getNext() -> getUser().getScore() >= newPlayer.getScore()){
+           current = current -> getNext();
+       }
+       newNode -> setNext(current -> getNext());
+       current -> setNext(newNode);
+   }
+   // we only want to keep the top 5 players with the highest scores
+   if(listSize >= 5){
+       Node* temp = head; 
+       for(int i = 1; i < 5; i++){
+           temp = temp -> getNext();
+       }
+       Node* nodeToDelete = temp -> getNext(); 
+       temp -> setNext(nullptr);
+       delete nodeToDelete;
+       listSize--;
+   }else{
+      listSize++;
+   }
+}
+
+void LinkedList::displayTopFive() const{
+   cout << "=== Leaderboard ===" << endl;
+   Node* current = head;
+   int rank = 1; 
+   while(current && rank <= 5){
+       int currentScore = current -> getUser().getScore();
+       cout << rank << ". " << current -> getUser().getName() << " - " << currentScore << endl;
+       current = current -> getNext(); 
+       ++rank; 
+   }
+}
+
+void LinkedList::loadFromFile(const string& filename){
+   ifstream file(filename);
+   if(!file){
+       cout << "Cannot open file to read" << endl;
+       return;
+   }
+   clear(); 
+
+   string name; 
+   int score;
+   
+   while(file >> name >> score){
+       User user(name, score);
+       insertPlayer(user);
+   }
+   file.close();
+}
+
+void LinkedList::saveToFile(const string& filename) const{
+   ofstream outFS(filename);
+   if(!outFS){
+       cout << "Cannot open file to write" << endl;
+       return;
+   }
+   Node* current = head;
+   while(current){
+       outFS << current -> getUser().getName() << " " << current -> getUser().getScore() << endl;
+       current = current -> getNext();
+   }
+   outFS.close();
+}
