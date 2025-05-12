@@ -9,7 +9,6 @@
 #include "WordGame.h"
 #include "LinkedList.h"
 #include "Wordle.h"
-#include "LeaderBoardList.h"
 
 using namespace std;
 
@@ -66,7 +65,7 @@ int main() {
     cout << "Welcome! Please enter your name: ";
     cin >> name;
     player.setName(name);
-    LeaderBoardList* leaderLL = new LeaderBoardList();
+    LinkedList* leaderLL = new LinkedList();
     leaderLL->loadFromFile("leaderboard.txt");
 
     int userInput;
