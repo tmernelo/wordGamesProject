@@ -1,4 +1,5 @@
 #include "Hangman.h"
+#include "LinkedList.h"
 #include <iostream>
 #include <vector>
 #include <iomanip>
@@ -65,6 +66,7 @@ char askUserInput(vector<char>& attemptList) {
 }
 
 void Hangman::play() {
+    LinkedList * leaderboardLL = new LinkedList();
     string randomWord = wordBank.getRandomWord();
     vector<char> answerWord;
     vector<char> displayWord;
@@ -118,6 +120,7 @@ void Hangman::play() {
             cout << "You WIN!" << endl;
             //float tempScore = static_cast<float> (correct)/(correct+misses); 
             player->addWin();
+            // leaderboardLL -> insertUser(*player);
             return;
         }
     }
