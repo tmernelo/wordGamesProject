@@ -18,6 +18,7 @@ struct LinkedList {
    public: 
       LinkedList();
       LinkedList(const std::string& word);
+      
       ~LinkedList();
       void clear();
       
@@ -28,6 +29,13 @@ struct LinkedList {
       void push_back(const std::string& word);
       bool loadWords(const std::string file);
       std::string getRandomWord() const;
+
+      // leaderboard methods
+      void insertPlayer(const User& newPlayer);
+      void displayTopFive() const;
+      void loadFromFile(const std::string& filename);
+      void saveToFile(const std::string& filename) const;
 };
 
 #endif
+
