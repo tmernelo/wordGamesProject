@@ -24,7 +24,9 @@ void Wordle::play() {
 
     int attempts = 6;
     string guess;
-
+    cout << GREEN << "GREEN: " << RESET << "correct place" << endl;//added
+    cout << YELLOW << "YELLOW: " << RESET << "letter in wrong place" << endl;//added
+    cout << RED << "RED: " << RESET << "letter is not in word" << endl << endl;//added
     cout << "\n=== WORDLE START ===\n";
     while (attempts > 0) {
         cout << "Enter a 5-letter guess (" << attempts << " tries left): ";
@@ -51,7 +53,6 @@ void Wordle::play() {
         if (guess == target) {
             cout << "You guessed it! The word was: " << target << endl;
             player->addWin();
-            // leaderboardLL -> insertUser(*player);
             return;
         }
 
