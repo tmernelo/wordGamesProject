@@ -9,7 +9,7 @@ using namespace std;
 
 Hangman::Hangman(User* u) : WordGame(u) {
     wordBank.loadWords("hangman_words.txt");
-    asciiVector.push_back(" +---+\n |   |\n     |\n     |\n    |\n    |\n=========\n");
+    asciiVector.push_back(" +---+\n |   |\n     |\n     |\n     |\n     |\n=========\n");
     asciiVector.push_back(" +---+\n |   |\n O   |\n     |\n     |\n     |\n=========\n");
     asciiVector.push_back(" +---+\n |   |\n O   |\n |   |\n     |\n     |\n=========\n");
     asciiVector.push_back(" +---+\n |   |\n O   |\n/|   |\n     |\n     |\n=========\n");
