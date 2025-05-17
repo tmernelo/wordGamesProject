@@ -13,7 +13,6 @@ void LeaderBoard::addPlayer(User* player) {
 
 void LeaderBoard::showTopPlayers() const {
     cout << "=== Leaderboard ===" << endl;
-    for (const auto& player : topPlayers) {
-        cout << player -> getName() << " - " << player -> getScore() << " win(s)" << endl;
-    }
+    for (int i = 0; i < topPlayers.size(); ++i) {
+        cout << topPlayers[i] -> getName() << " - " << topPlayers[i] -> getScore() << " win(s)" << endl;    }
 }
