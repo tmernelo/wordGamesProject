@@ -14,7 +14,7 @@ Hangman::Hangman(User* u) : WordGame(u) {
     asciiVector.push_back(" +---+\n |   |\n O   |\n |   |\n     |\n     |\n=========\n");
     asciiVector.push_back(" +---+\n |   |\n O   |\n/|   |\n     |\n     |\n=========\n");
     asciiVector.push_back(" +---+\n |   |\n O   |\n/|\\  |\n     |\n     |\n=========\n");
-    asciiVector.push_back(" +---+\n |   |\n O   |\n/|\\  |\n/     |\n     |\n=========\n");
+    asciiVector.push_back(" +---+\n |   |\n O   |\n/|\\  |\n/    |\n     |\n=========\n");
     asciiVector.push_back(" +---+\n |   |\n O   |\n/|\\  |\n/ \\  |\n     |\n=========\n");
 }
 
@@ -35,11 +35,11 @@ int Hangman::checkLetter(vector<char>& word, vector<char>& toGuess, char guessed
 }
 
 bool containsLetter(vector<char>& guessed, char letter){
-    for (char c : guessed) {
-        if (c == letter) {
+    for (int i = 0; i < guessed.size(); i++) {
+        if (guessed.at(i) == letter) {
             return true;
         }
-    } 
+    }
     return false;
 }
 
@@ -89,7 +89,7 @@ void Hangman::play() {
     int tries = 7;
     int tracker = count_if(answerWord.begin(), answerWord.end(), ::isalpha);
 
-
+    cout << "\n=== HANGMAN START ===\n" << endl;
     while (misses < 7) {
         char guess = askUserInput(attemptList);
 
@@ -113,7 +113,9 @@ void Hangman::play() {
             
         }
 
-        for (char c : displayWord) cout << c << ' ';
+        for (int i = 0; i < displayWord.size(); i++) {
+            cout << displayWord.at(i) << ' ';
+        }
         cout << endl;
         
         if (tracker == 0) {
