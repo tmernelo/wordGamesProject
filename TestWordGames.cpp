@@ -51,7 +51,9 @@ void testLetterCheckLogic() {
 
     cout << "PASS: checkLetter works as expected.\n";
     cout << "Display state: ";
-    for (char c : display) cout << c << ' ';
+    for (int i = 0; i < display.size(); i++) {
+        cout << display.at(i) << ' ';
+    }
     cout << endl;
 }
 
