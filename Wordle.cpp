@@ -2,6 +2,7 @@
 #include "LinkedList.h"
 #include <iostream>
 #include <algorithm>
+#include <cctype>
 using namespace std;
 
 #define RESET "\033[0m"
@@ -32,6 +33,19 @@ void Wordle::play() {
         cout << "Enter a 5-letter guess (" << attempts << " tries left): ";
         cin >> guess;
         transform(guess.begin(), guess.end(), guess.begin(), ::tolower);
+
+        bool isLetter = true;
+
+        for(int i = 0; i < guess.length(); i++){
+            if (!isalpha(guess.at(i))) {
+                isLetter = false;
+            }
+        } 
+
+        if(isLetter == false){
+            cout << "input must be a letter!" << endl;
+            continue;
+        }
 
         if (guess.length() != 5) {
             cout << "Guess must be exactly 5 letters.\n";
